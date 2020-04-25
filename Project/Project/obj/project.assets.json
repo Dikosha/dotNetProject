@@ -5241,11 +5241,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\м1\\source\\repos\\Project\\Project\\Project.csproj",
+      "projectUniqueName": "C:\\Users\\м1\\Desktop\\Git\\dotNetProject\\Project\\Project\\Project.csproj",
       "projectName": "Project",
-      "projectPath": "C:\\Users\\м1\\source\\repos\\Project\\Project\\Project.csproj",
+      "projectPath": "C:\\Users\\м1\\Desktop\\Git\\dotNetProject\\Project\\Project\\Project.csproj",
       "packagesPath": "C:\\Users\\м1\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\м1\\source\\repos\\Project\\Project\\obj\\",
+      "outputPath": "C:\\Users\\м1\\Desktop\\Git\\dotNetProject\\Project\\Project\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\м1\\AppData\\Roaming\\NuGet\\NuGet.Config",

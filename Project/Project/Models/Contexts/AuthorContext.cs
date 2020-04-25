@@ -13,10 +13,11 @@ namespace Project.Models.Contexts
         public AuthorContext(DbContextOptions<AuthorContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Author>().HasKey(a => a.AuthorId);
+           
         }
 
     }
