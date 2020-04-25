@@ -5,26 +5,24 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Models.Contexts;
+using Project.Models.Entities;
 
 namespace Project.Controllers
 {
     public class BookController : Controller
     {
-        private BookContext dbBookContext;
-        private AuthorContext dbAuthorContext;
-        private CategoryContext dbCategoryContext;
+        private UserContext db;
 
-        public BookController(BookContext bookContext, AuthorContext authorContext)
+        public BookController(UserContext userContext)
         {
-            dbBookContext = bookContext;
-            dbAuthorContext = authorContext;
+            db = userContext;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var books = await dbBookContext.Books.ToListAsync();
-            return View("Index", books);
+            var books = await db.Books.ToListAsync();
+            return View("Index",books);
         }
 
         [HttpGet]

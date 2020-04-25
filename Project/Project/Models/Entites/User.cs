@@ -10,5 +10,8 @@ namespace Project.Models.Entities
         public int Id { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        public int Bookid { get; set; }
+        public Book Book { get; set; }
+
     }
 }

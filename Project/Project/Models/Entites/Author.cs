@@ -7,8 +7,9 @@ namespace Project.Models.Entities
 {
     public class Author
     {
-        public int AuthorId { get; set; }
+        public int Id { get; set; }
 
         public string FullName {get; set;}
+        
     }
 }
