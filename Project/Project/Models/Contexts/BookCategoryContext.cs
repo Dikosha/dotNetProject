@@ -9,25 +9,26 @@ namespace Project.Models.Contexts
 {
     public class BookCategoryContext : DbContext
     {
-        public DbSet<BookCategory> BookCategories { get; set; }
+
+        public DbSet<BookCategory> BookCategory { get; set; }
         public BookCategoryContext(DbContextOptions<BookCategoryContext> options)
             : base(options)
         {
-            
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<BookCategory>()
+            /*modelBuilder.Entity<BookCategory>()
                 .HasKey(bc => new { bc.BookId, bc.CategoryId });
             modelBuilder.Entity<BookCategory>()
                 .HasOne(bc => bc.Book)
                 .WithMany(b => b.BookCategories)
-                .HasForeignKey(bc => bc.BookId);
+                .HasForeignKey(bc => bc.Id);
             modelBuilder.Entity<BookCategory>()
                 .HasOne(bc => bc.Category)
                 .WithMany(c => c.BookCategories)
-                .HasForeignKey(bc => bc.CategoryId);
+                .HasForeignKey(bc => bc.Id);*/
         }
     }
 }

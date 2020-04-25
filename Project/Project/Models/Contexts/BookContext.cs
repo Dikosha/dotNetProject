@@ -9,14 +9,13 @@ namespace Project.Models.Contexts
 {
     public class BookContext : DbContext
     {
-        public DbSet<Book> Books { get; set; }
+        public DbSet<Book> Books{ get; set; }
+        public DbSet<Author> Authors{ get; set; }
         public BookContext(DbContextOptions<BookContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            modelBuilder.Entity<Book>().HasKey(b => b.BookId);
-        }
+       
     }
 }

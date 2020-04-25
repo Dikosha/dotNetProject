@@ -1,17 +1,6 @@
-﻿@model IEnumerable<Project.Models.Entities.Book>
-
-@{
+﻿@{
     ViewData["Title"] = "Book Page";
 }
     <div class="text-center">
         <div>HELLO BOOK</div>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.BookId)</td>
-                <td>@Html.DisplayFor(modelItem => item.BookCategories)</td>
-                <td>@Html.DisplayFor(modelItem => item.Title)</td>
-                <td>@Html.DisplayFor(modelItem => item.Author)</td>
-            </tr>
-        }
     </div>

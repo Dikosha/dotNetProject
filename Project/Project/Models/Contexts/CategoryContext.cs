@@ -13,6 +13,7 @@ namespace Project.Models.Contexts
         public CategoryContext(DbContextOptions<CategoryContext> options)
             : base(options)
         {
+            Database.EnsureCreated();
         }
     }
 }

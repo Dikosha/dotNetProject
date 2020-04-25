@@ -7,8 +7,13 @@ namespace Project.Models.Entities
 {
     public class Category
     {
-        public int CategoryId { get; set; }
+        public int Id { get; set; }
         public string CategoryName { get; set; }
         public ICollection<BookCategory> BookCategories { get; set; }
+
+        public static implicit operator Category(BookCategory v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
