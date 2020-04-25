@@ -192,3 +192,9 @@ C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\bin\Debug\netcoreapp3.1\S
 C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Project.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Book\Edit.cshtml.g.cs
 C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Book\EditCategory.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Author\Delete.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Author\Details.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Author\Edit.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Category\CategoryDetails.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Category\DeleteCategory.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Category\EditCategory.cshtml.g.cs
