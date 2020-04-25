@@ -11,7 +11,7 @@ namespace Project.Controllers
 {
     public class AuthorController : Controller
     {
-        private AuthorContext db;
+        private UserContext db;
 
 
         public IActionResult Author()

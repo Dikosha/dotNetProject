@@ -11,7 +11,7 @@ namespace Project.Controllers
 {
     public class CategoryController : Controller
     {
-        private BookCategoryContext db;
+        private UserContext db;
         public IActionResult Index()
         {
             return View();
@@ -20,7 +20,7 @@ namespace Project.Controllers
         {
             if (Id != null)
             {
-                BookCategory category = await db.BookCategory.FirstOrDefaultAsync(p => p.Id == Id);
+                BookCategory category = await db.BookCategories.FirstOrDefaultAsync(p => p.Id == Id);
                 if (category != null)
                     return View(category);
             }
@@ -29,7 +29,7 @@ namespace Project.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(BookCategory category)
         {
-            db.BookCategory.Update(category);
+            db.BookCategories.Update(category);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
@@ -40,7 +40,7 @@ namespace Project.Controllers
         {
             if (Id != null)
             {
-                BookCategory category = await db.BookCategory.FirstOrDefaultAsync(p => p.Id == Id);
+                BookCategory category = await db.BookCategories.FirstOrDefaultAsync(p => p.Id == Id);
                 if (category != null)
                     return View(category);
             }
@@ -52,10 +52,10 @@ namespace Project.Controllers
         {
             if (Id != null)
             {
-                BookCategory category = await db.BookCategory.FirstOrDefaultAsync(p => p.Id == Id);
+                BookCategory category = await db.BookCategories.FirstOrDefaultAsync(p => p.Id == Id);
                 if (category != null)
                 {
-                    db.BookCategory.Remove(category);
+                    db.BookCategories.Remove(category);
                     await db.SaveChangesAsync();
                     return RedirectToAction("Index");
                 }

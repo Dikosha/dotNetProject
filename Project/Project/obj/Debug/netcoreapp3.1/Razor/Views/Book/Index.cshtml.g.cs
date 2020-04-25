@@ -60,9 +60,9 @@ using Project.Models;
         {
 #nullable restore
 #line 2 "C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\Views\Book\Index.cshtml"
-
+      
         ViewData["Title"] = "Book Page";
-
+    
 
 #line default
 #line hidden
@@ -217,7 +217,7 @@ using Project.Models;
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
         public global::Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper Json { get; private set; }
         [global::Microsoft.AspNetCore.Mvc.Razor.Internal.RazorInjectAttribute]
-        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<dynamic> Html { get; private set; }
+        public global::Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper<IEnumerable<Project.Models.Entities.Book>> Html { get; private set; }
     }
 }
 #pragma warning restore 1591
