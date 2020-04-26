@@ -11,56 +11,59 @@ namespace Project.Controllers
 {
     public class CategoryController : Controller
     {
-        private BookCategoryContext db;
-        public IActionResult Index()
+        private UserContext db;
+
+        public CategoryController(UserContext userContext)
         {
-            return View();
+            db = userContext;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var categories = await db.Categories.ToListAsync();
+            return View(categories);
         }
         public async Task<IActionResult> Edit(int? Id)
         {
             if (Id != null)
             {
-                BookCategory category = await db.BookCategory.FirstOrDefaultAsync(p => p.Id == Id);
+                Category category = await db.Categories.FirstOrDefaultAsync(p => p.Id == Id);
                 if (category != null)
                     return View(category);
             }
             return NotFound();
         }
         [HttpPost]
-        public async Task<IActionResult> Edit(BookCategory category)
+        public async Task<IActionResult> Edit(Category category)
         {
-            db.BookCategory.Update(category);
+            db.Categories.Update(category);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult Add()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Category model)
+        {
+            Category category = new Category() { CategoryName = model.CategoryName };
+            db.Categories.Add(category);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        [ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? Id)
+        [Route("/Category/Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (Id != null)
-            {
-                BookCategory category = await db.BookCategory.FirstOrDefaultAsync(p => p.Id == Id);
-                if (category != null)
-                    return View(category);
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int? Id)
-        {
-            if (Id != null)
-            {
-                BookCategory category = await db.BookCategory.FirstOrDefaultAsync(p => p.Id == Id);
-                if (category != null)
-                {
-                    db.BookCategory.Remove(category);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-            }
-            return NotFound();
+            Category category = await db.Categories.FirstOrDefaultAsync(b => b.Id == id);
+            db.Categories.Remove(category);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Category");
         }
     }
 }

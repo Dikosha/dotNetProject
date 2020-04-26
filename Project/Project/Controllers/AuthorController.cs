@@ -11,12 +11,17 @@ namespace Project.Controllers
 {
     public class AuthorController : Controller
     {
-        private AuthorContext db;
+        private UserContext db;
 
-
-        public IActionResult Author()
+        public AuthorController(UserContext userContext)
         {
-            return View();
+            db = userContext;
+        }
+        [HttpGet]
+        public async Task<IActionResult> Index()
+        {
+            var authors = await db.Authors.ToListAsync();
+            return View(authors);
         }
 
         public async Task<IActionResult> Edit(int? Id)
@@ -25,45 +30,41 @@ namespace Project.Controllers
             {
                 Author author = await db.Authors.FirstOrDefaultAsync(p => p.Id == Id);
                 if (author != null)
-                    return View(author);
+                    return View();
             }
             return NotFound();
         }
-        [HttpPost]
-        public async Task<IActionResult> Edit(Author author)
+
+        public IActionResult Add()
         {
-            db.Authors.Update(author);
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Author model)
+        {
+            Author author = new Author() {FullName = model.FullName };
+            db.Authors.Add(author);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(Author model)
+        {
+            db.Authors.Update(model);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
         [HttpGet]
-        [ActionName("Delete")]
-        public async Task<IActionResult> ConfirmDelete(int? Id)
+        [Route("/Author/Delete/{id}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            if (Id != null)
-            {
-                Author author = await db.Authors.FirstOrDefaultAsync(p => p.Id == Id);
-                if (author != null)
-                    return View(author);
-            }
-            return NotFound();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Delete(int? Id)
-        {
-            if (Id != null)
-            {
-                Author author = await db.Authors.FirstOrDefaultAsync(p => p.Id == Id);
-                if (author != null)
-                {
-                    db.Authors.Remove(author);
-                    await db.SaveChangesAsync();
-                    return RedirectToAction("Index");
-                }
-            }
-            return NotFound();
+            Author author = await db.Authors.FirstOrDefaultAsync(b => b.Id == id);
+            db.Authors.Remove(author);
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Author");
         }
        
     }
