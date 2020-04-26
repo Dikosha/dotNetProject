@@ -1,10 +1,14 @@
 ﻿@model Project.Models.Entities.Category
+
 @{
-    ViewBag.Title = "Category Editing";
+    ViewData["Title"] = "Add";
 }
-<form asp-action="edit" asp-controller="home" asp-route-id="@Model.Id">
+
+<h1>Add</h1>
+
+<form asp-action="Add" asp-controller="Category" asp-anti-forgery="true">
     <div class="form-group">
-        <label asp-for="CategoryName" class="control-label">Name</label>
+        <label class="control-label">Name</label>
         <input type="text" asp-for="CategoryName" class="form-control" />
     </div>
 

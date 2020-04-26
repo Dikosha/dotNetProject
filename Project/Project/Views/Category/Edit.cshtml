@@ -1,13 +1,12 @@
-﻿@model Project.Models.Entities.Author
+﻿@model Project.Models.Entities.Category
 @{
-    ViewBag.Title = "Author Editing";
+    ViewBag.Title = "Category Editing";
 }
-    <form asp-action="Edit" asp-controller="Author">
+    <form asp-action="Edit" asp-controller="Category">
         <input type="hidden" asp-for="Id" value="@Model.Id" class="form-control" />
-
         <div class="form-group">
-            <label class="control-label">Full Name</label>
-            <input type="text" asp-for="FullName" class="form-control" />
+            <label class="control-label">Name</label>
+            <input type="text" asp-for="CategoryName" class="form-control" />
         </div>
 
         <div class="form-group">
