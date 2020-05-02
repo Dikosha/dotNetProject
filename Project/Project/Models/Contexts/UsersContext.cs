@@ -15,6 +15,7 @@ namespace Project.Models.Contexts
         public DbSet<Author> Authors { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<BookCategory> BookCategories { get; set; }
+        public DbSet<UserBook> UserBook { get; set; }
 
         public UserContext(DbContextOptions<UserContext> options)
             : base(options)
