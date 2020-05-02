@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Project.Models.Contexts;
@@ -47,6 +48,21 @@ namespace Project.Controllers
         {
             return View();
         }
+
+
+        [AcceptVerbs("Get", "Post")]
+        [AllowAnonymous]
+        public async Task<IActionResult> VerifyEmail(String email)
+        {
+            User user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+            if(user == null)
+            {
+                return Json(true);
+            }
+            return Json($"Email {email} is already in use");
+        }
+
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterModel model)
@@ -57,7 +73,7 @@ namespace Project.Controllers
                 if (user == null)
                 {
                     // добавляем пользователя в бд
-                    db.Users.Add(new User { Email = model.Email, Password = model.Password });
+                    db.Users.Add(new User { Email = model.Email, Password = model.Password});
                     await db.SaveChangesAsync();
 
                     await Authenticate(model.Email); // аутентификация

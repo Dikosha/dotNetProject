@@ -12,5 +12,6 @@ namespace Project.ViewModels
         public IEnumerable<Author> authors { get; set; }
         public IEnumerable<Category> categories { get; set; }
         public IEnumerable<BookCategory> bookCategories { get; set; }
+
     }
 }

@@ -1,17 +1,17 @@
-﻿using System;
+﻿using Project.Models.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Project.Models.Entities
 {
-    public class User
+    public class UserBook
     {
         public int Id { get; set; }
-        public string Email { get; set; }
-        public string Password { get; set; }
-        public int Bookid { get; set; }
+        public int UserId { get; set; }
+        public User User { get; set; }
+        public int BookId { get; set; }
         public Book Book { get; set; }
-
     }
 }
