@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using DocumentFormat.OpenXml.Office2010.Excel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
@@ -15,7 +17,6 @@ namespace Project.Controllers
     public class BookController : Controller
     {
         private UserContext db;
-
         public BookController(UserContext userContext)
         {
             db = userContext;
@@ -24,7 +25,8 @@ namespace Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var books = await db.Books.Where(b => b.isFree == true).ToListAsync();
+            var books = await db.Books.ToListAsync();
+            
             foreach(var book in books)
             {
                 book.Author = await db.Authors.FirstOrDefaultAsync(a => a.Id == book.AuthorId);
@@ -32,6 +34,7 @@ namespace Project.Controllers
             return View("Index",books);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("/Book/Edit/{id}")]
         public async Task<IActionResult> Edit(int id)
@@ -44,6 +47,7 @@ namespace Project.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Edit(BookAuthorCategoryModel model)
         {
@@ -55,6 +59,7 @@ namespace Project.Controllers
             return RedirectToAction("Index", "Book");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("/Book/EditCategory/{id}")]
         public async Task<IActionResult> EditCategory(int id)
@@ -68,6 +73,7 @@ namespace Project.Controllers
         }
 
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("/Book/AddCategory/{bookid}/{id}")]
         public async Task<IActionResult> AddCategory(int bookid, int id)
@@ -84,6 +90,7 @@ namespace Project.Controllers
     new { controller = "Book", action = "EditCategory", Id = bookid }));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("/Book/RemoveCategory/{bookid}/{id}")]
         public async Task<IActionResult> RemoveCategory(int bookid, int id)
@@ -100,6 +107,7 @@ namespace Project.Controllers
     new { controller = "Book", action = "EditCategory", Id = bookid }));
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         [Route("/Book/Delete/{id}")]
         public async Task<IActionResult> Delete(int id)
@@ -110,6 +118,7 @@ namespace Project.Controllers
             return RedirectToAction("Index", "Book");
         }
 
+        [Authorize(Roles = "admin")]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -119,6 +128,7 @@ namespace Project.Controllers
             return View(model);
         }
 
+        [Authorize(Roles = "admin")]
         [HttpPost]
         public async Task<IActionResult> Add(BookAuthorCategoryModel model)
         {
@@ -130,6 +140,18 @@ namespace Project.Controllers
     new { controller = "Book", action = "EditCategory", Id = book.Id}));
         }
 
-
+        [Authorize(Roles = "user")]
+        [HttpGet]
+        [Route("/Book/AddToUser/{id}")]
+        public async Task<IActionResult> AddToUser(int id)
+        {
+            string userEmail = User.Identity.Name;
+            User user = await db.Users.FirstOrDefaultAsync(u => u.Email == userEmail);
+            db.UserBook.Add(new UserBook { BookId = id, UserId = user.Id });
+            await db.SaveChangesAsync();
+            return RedirectToAction("Index", "Profile");
         }
+
+
+    }
     }

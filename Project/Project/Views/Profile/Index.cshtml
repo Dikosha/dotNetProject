@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Project.ViewModels.ProfileModel>
+@{
+    ViewData["Title"] = "Profile Page";
+}
+<div class="text-center">
+    <div>Your books </div>
+  
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@Html.DisplayFor(modelItem => item.Id)</th>
+                    <td>@Html.DisplayFor(modelItem => item.Title)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Author)</td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

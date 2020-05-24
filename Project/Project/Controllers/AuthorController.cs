@@ -20,8 +20,16 @@ namespace Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var authors = await db.Authors.ToListAsync();
-            return View(authors);
+            if (User.IsInRole("admin"))
+            {
+                var authors = await db.Authors.ToListAsync();
+                return View(authors);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Book");
+            }
+            
         }
 
         public async Task<IActionResult> Edit(int? Id)

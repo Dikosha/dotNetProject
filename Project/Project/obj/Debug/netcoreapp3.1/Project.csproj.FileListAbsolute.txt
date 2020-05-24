@@ -196,3 +196,4 @@ C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\R
 C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Category\Edit.cshtml.g.cs
 C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Category\Index.cshtml.g.cs
 C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Category\Add.cshtml.g.cs
+C:\Users\м1\Desktop\Git\dotNetProject\Project\Project\obj\Debug\netcoreapp3.1\Razor\Views\Profile\Index.cshtml.g.cs
