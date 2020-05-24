@@ -24,7 +24,14 @@ namespace Project.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Book");
+            }
+            else
+            {
+                return View();
+            }
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -39,7 +46,7 @@ namespace Project.Controllers
                 {
                     await Authenticate(user); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Book");
                 }
                 ModelState.AddModelError("", "Некорректные логин и(или) пароль");
             }
@@ -48,7 +55,14 @@ namespace Project.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            return View();
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Book");
+            }
+            else
+            {
+                return View();
+            }
         }
 
 
@@ -78,14 +92,16 @@ namespace Project.Controllers
                     user = new User { Email = model.Email, Password = model.Password };
                     Role userRole = await db.Roles.FirstOrDefaultAsync(r => r.Name == "user");
                     if (userRole != null)
+                    {
                         user.Role = userRole;
-
+                        user.RoleId = 2;
+                    }
                     db.Users.Add(user);
                     await db.SaveChangesAsync();
 
                     await Authenticate(user); // аутентификация
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Book");
                 }
                 else
                     ModelState.AddModelError("", "Некорректные логин и(или) пароль");

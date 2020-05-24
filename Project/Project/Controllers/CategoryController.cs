@@ -21,8 +21,16 @@ namespace Project.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var categories = await db.Categories.ToListAsync();
-            return View(categories);
+            if (User.IsInRole("admin"))
+            {
+                var categories = await db.Categories.ToListAsync();
+                return View(categories);
+            }
+            else
+            {
+                return RedirectToAction("Index", "Book");
+            }
+           
         }
         public async Task<IActionResult> Edit(int? Id)
         {
